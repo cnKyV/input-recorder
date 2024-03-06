@@ -9,4 +9,7 @@ add_executable(input_recorder main.cpp
         include/input.hpp
         include/sequence.hpp
         include/stdafx.h
-        include/enum-types.hpp)
+        include/enum-types.hpp
+        include/constants/keys.hpp
+        include/key.hpp
+)

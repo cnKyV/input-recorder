@@ -1,0 +1,8 @@
+//
+// Created by cenka on 3/7/2024.
+//
+
+#ifndef INPUT_RECORDER_DEFINES_HPP
+#define INPUT_RECORDER_DEFINES_HPP
+
+#endif //INPUT_RECORDER_DEFINES_HPP

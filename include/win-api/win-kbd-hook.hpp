@@ -45,10 +45,13 @@ LRESULT CALLBACK KBDHook(int nCode, WPARAM wParam, LPARAM lParam)
 
                 if (std::find_if(pressedDownKeys->begin(), pressedDownKeys->end(),[&](const Key& key) {
                     return key.key == s->vkCode;
-                }) == pressedDownKeys->end())
+                }) != pressedDownKeys->end())
                 {
-                    for (int i = 0; i < *std::count(pressedDownKeys->begin(), pressedDownKeys->end(),); ++i) {
-
+                    for (size_t i = 0; i < pressedDownKeys->size(); ++i) {
+                        if (pressedDownKeys->at(i).key == s->vkCode)
+                        {
+                            pressedDownKeys->erase(pressedDownKeys->begin() + i, pressedDownKeys->begin()+i+1);
+                        }
                     }
                 }
 

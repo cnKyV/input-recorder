@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <chrono>
+#include <memory>
+#include <algorithm>
 
 typedef std::chrono::duration<double, std::milli> MsDuration;
 typedef std::chrono::high_resolution_clock Clock;

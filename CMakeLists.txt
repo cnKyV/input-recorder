@@ -12,5 +12,7 @@ add_executable(input_recorder main.cpp
         include/enum-types.hpp
         include/constants/keys.hpp
         include/key.hpp
-        include/winapi/win-keyboard-message-handler.hpp
+        include/win-api/win-kbd-hook.hpp
+        include/utils/time-utilities.hpp
+        include/win-api/key.hpp
 )

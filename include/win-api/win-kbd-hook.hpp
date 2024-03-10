@@ -9,14 +9,16 @@
 #include <windows.h>
 #include <vector>
 #include "../utils/time-utilities.hpp"
+#include "../sequence.hpp"
 #include "key.hpp"
 
 class WinKeyboardHook{
-    std::unique_ptr<std::vector<Key>> list_of_recorded_keys;
+    static std::unique_ptr<std::vector<Key>> list_of_recorded_keys;
 
 public:
     static LRESULT CALLBACK KBDHook(int nCode, WPARAM wParam, LPARAM lParam)
     {
+
         auto *s = reinterpret_cast<KBDLLHOOKSTRUCT *>(lParam);
         char c;
         static std::unique_ptr<std::chrono::steady_clock::time_point> ptrBegin = nullptr;
@@ -45,7 +47,7 @@ public:
                 {
                     end = std::chrono::steady_clock::now();
                     std::cout << "Elapsed Time(ms): " << std::chrono::duration_cast<std::chrono::milliseconds>(end-*ptrBegin).count() << " ms" << std::endl;
-
+                    list_of_recorded_keys->emplace_back(s->vkCode, *ptrBegin, end);
                     if (std::find_if(pressedDownKeys->begin(), pressedDownKeys->end(),[&](const Key& key) {
                         return key.key == s->vkCode;
                     }) != pressedDownKeys->end())
@@ -53,6 +55,7 @@ public:
                         for (size_t i = 0; i < pressedDownKeys->size(); ++i) {
                             if (pressedDownKeys->at(i).key == s->vkCode)
                             {
+
                                 pressedDownKeys->erase(pressedDownKeys->begin() + i, pressedDownKeys->begin()+i+1);
                             }
                         }
@@ -60,15 +63,20 @@ public:
                 }
                 break;
 
+
             default:
                 break;
         }
 
         return CallNextHookEx(NULL, nCode, wParam, lParam);
     }
+
+    Sequence get_sequence()
+    {
+
+    }
 };
-
-
+std::unique_ptr<std::vector<Key>> WinKeyboardHook::list_of_recorded_keys = std::make_unique<std::vector<Key>>();
 
 
 #endif //INPUT_RECORDER_WIN_KBD_HOOK_HPP

@@ -11,7 +11,6 @@ add_executable(input_recorder main.cpp
         include/stdafx.h
         include/enum-types.hpp
         include/constants/keys.hpp
-        include/key.hpp
         include/win-api/win-kbd-hook.hpp
         include/utils/time-utilities.hpp
         include/win-api/key.hpp

@@ -9,10 +9,11 @@
 #include "input.hpp"
 #include "input-reader.hpp"
 #include <queue>
+#include "win-api/key.hpp"
 
 
 class Sequence{
-std::queue<Input> inputs;
+std::vector<Key> inputs;
 Clock::time_point startTime, endTime;
 bool beginRead = false;
 
@@ -26,15 +27,10 @@ public:
         beginRead = false;
     }
 
-    void initialize_sequence(std::queue<Input> inputList)
+    void initialize_sequence(std::vector<Key> inputList)
     {
         inputs = inputList;
 
-    }
-
-    std::queue<Input> get_sequence()
-    {
-        return inputs;
     }
 };
 

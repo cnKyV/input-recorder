@@ -11,7 +11,13 @@
 struct Key{
     DWORD key;
     std::chrono::steady_clock::time_point start_time;
+    std::chrono::steady_clock::time_point end_time;
 
     Key(DWORD key, std::chrono::steady_clock::time_point start_time):key(key),start_time(start_time){}
+
+    void set_endtime(std::chrono::steady_clock::time_point endTime)
+    {
+        end_time = endTime;
+    }
 };
 #endif //INPUT_RECORDER_KEY_HPP

@@ -17,21 +17,22 @@ Clock::time_point startTime, endTime;
 bool beginRead = false;
 
 public:
-    void startSequence(){
+    void start_sequence(){
         startTime = Clock::now();
         beginRead = true;
     }
-    void endSequence(){
+    void end_sequence(){
         endTime = Clock::now();
         beginRead = false;
     }
 
-    void registerInput(const Input& input)
+    void initialize_sequence(std::queue<Input> inputList)
     {
-        if (beginRead) inputs.push(input);
+        inputs = inputList;
+
     }
 
-    std::queue<Input> getSequence()
+    std::queue<Input> get_sequence()
     {
         return inputs;
     }

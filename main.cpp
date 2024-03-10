@@ -3,7 +3,7 @@
 
 int main()
 {
-    HHOOK kbd = SetWindowsHookEx(WH_KEYBOARD_LL, &KBDHook, 0, 0);
+    HHOOK kbd = SetWindowsHookEx(WH_KEYBOARD_LL, &WinKeyboardHook::KBDHook, 0, 0);
 
     MSG message;
     while(GetMessage(&message, NULL, NULL, NULL) > 0){

@@ -9,15 +9,16 @@
 #include "input.hpp"
 #include "input-reader.hpp"
 #include <queue>
+#include "win-api/win-message-queue.hpp"
 #include "win-api/key.hpp"
 
 
 class Sequence{
-std::vector<Key> inputs;
-Clock::time_point startTime, endTime;
-bool beginRead = false;
+    std::vector<Key> inputs;
+    Clock::time_point startTime, endTime;
+    message_queue messageQueue;
+    bool beginRead = false;
 
-public:
     void start_sequence(){
         startTime = Clock::now();
         beginRead = true;
@@ -30,8 +31,29 @@ public:
     void initialize_sequence(std::vector<Key> inputList)
     {
         inputs = inputList;
-
     }
+public:
+    void begin()
+    {
+        start_sequence();
+        messageQueue.start();
+    }
+
+    void end()
+    {
+      if(beginRead)
+      {
+          messageQueue.stop();
+          end_sequence();
+      }
+    }
+
+    ~Sequence()
+    {
+        std::time_t time = std::chrono::system_clock::to_time_t(Clock::now());
+        std::cout << "Deconstruct Sequence Timestamp: " << std::ctime(&time) << std::endl;
+    }
+
 };
 
 #endif //INPUT_RECORDER_SEQUENCE_HPP

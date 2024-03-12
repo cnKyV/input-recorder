@@ -1,17 +1,12 @@
-#include <iostream>
-#include "include/win-api/win-kbd-hook.hpp"
+#include "include/sequence.hpp"
 
 int main()
 {
-    HHOOK kbd = SetWindowsHookEx(WH_KEYBOARD_LL, &WinKeyboardHook::KBDHook, 0, 0);
+    auto * sequence = new Sequence();
 
-    MSG message;
-    while(GetMessage(&message, NULL, NULL, NULL) > 0){
-        TranslateMessage(&message);
-        DispatchMessage(&message);
+    sequence->begin();
 
-    }
+    delete sequence;
 
-    UnhookWindowsHookEx(kbd);
     return 0;
 }

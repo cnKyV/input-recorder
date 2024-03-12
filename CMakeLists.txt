@@ -14,4 +14,5 @@ add_executable(input_recorder main.cpp
         include/win-api/win-kbd-hook.hpp
         include/utils/time-utilities.hpp
         include/win-api/key.hpp
+        include/win-api/win-message-queue.hpp
 )

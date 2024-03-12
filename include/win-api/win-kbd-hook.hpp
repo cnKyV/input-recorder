@@ -8,8 +8,6 @@
 #include "../stdafx.h"
 #include <windows.h>
 #include <vector>
-#include "../utils/time-utilities.hpp"
-#include "../sequence.hpp"
 #include "key.hpp"
 
 class WinKeyboardHook{
@@ -71,10 +69,6 @@ public:
         return CallNextHookEx(NULL, nCode, wParam, lParam);
     }
 
-    Sequence get_sequence()
-    {
-
-    }
 };
 std::unique_ptr<std::vector<Key>> WinKeyboardHook::list_of_recorded_keys = std::make_unique<std::vector<Key>>();
 

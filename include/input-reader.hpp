@@ -13,7 +13,7 @@ class InputReader{
 public:
     Input ReadInput(std::string key, int keyHexadecimalValue)
     {
-        auto input = new Input(key, )
+//        auto input = new Input(key, )
     }
 };
 
